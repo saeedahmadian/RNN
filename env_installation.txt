@@ -1,0 +1,49 @@
+Dealing with TensorFlow incompatibility with Python 3.7
+*Note: I will remove this section once all needed libraries add support for Python 3.7.
+
+VERY IMPORTANT Once Miniconda has been downloaded you must create a Python 3.6 environment. Not all TensorFlow 2.0 packages currently (as of August 2019) support Python 3.7. This is not unusual, usually you will need to stay one version back from the latest Python to maximize compatibility with common machine learning packages. So you must execute the following commands:
+
+conda create -y --name tensorflow python=3.6
+To enter this environment, you must use the following command (for Windows), this command must be done every time you open a new Anaconda/Miniconda terminal window:
+
+activate tensorflow
+For Mac, do this:
+
+source activate tensorflow
+Installing Jupyter
+it is easy to install Jupyter notebooks with the following command:
+
+conda install -y jupyter
+Once Jupyter is installed, it is started with the following command:
+
+jupyter notebook
+The following packages are needed for this course:
+
+conda install -y scipy
+pip install --exists-action i --upgrade sklearn
+pip install --exists-action i --upgrade pandas
+pip install --exists-action i --upgrade pandas-datareader
+pip install --exists-action i --upgrade matplotlib
+pip install --exists-action i --upgrade pillow
+pip install --exists-action i --upgrade tqdm
+pip install --exists-action i --upgrade requests
+pip install --exists-action i --upgrade h5py
+pip install --exists-action i --upgrade pyyaml
+pip install --exists-action i --upgrade tensorflow_hub
+pip install --exists-action i --upgrade bayesian-optimization
+pip install --exists-action i --upgrade spacy
+pip install --exists-action i --upgrade gensim
+pip install --exists-action i --upgrade flask
+pip install --exists-action i --upgrade boto3
+pip install --exists-action i --upgrade gym
+pip install --exists-action i --upgrade tensorflow==2.0.0-beta1
+pip install --exists-action i --upgrade keras-rl2 --user
+conda update -y --all
+Notice that I am installing as specific version of TensorFlow. As of the current semester, this is the latest version of TensorFlow. It is very likely that Google will upgrade this during this semester. The newer version may have some incompatibilities, so it is important that we start with this version and end with the same.
+
+You should also link your new tensorflow environment to Jupyter so that you can choose it as a Kernal. Always make sure to run your Jupyter notebooks from your 3.6 kernel. This is demonstrated in the video.
+
+python -m ipykernel install --user --name tensorflow --display-name "Python 3.6 (tensorflow)"
+
+
+Link : https://github.com/jeffheaton/t81_558_deep_learning/blob/master/t81_558_class_01_1_overview.ipynb
