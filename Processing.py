@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 from statsmodels.tsa.stattools import adfuller
 from statsmodels.tsa.seasonal import seasonal_decompose as decomp
 import statsmodels.api as sm
-
+from statsmodels.tsa.api import VAR, DynamicVAR
 # df = pd.read_csv('Saeed.csv',header=3, delimiter=";")
 
 with open('Saeed.csv') as csvfile:
@@ -59,6 +59,20 @@ df_log_MA = df_log- df_log.rolling(7).mean()
 #         new_col.append('GAS_'+element)
 #     elif ind > 8:
 #         new_col.append('Temp_' + element)
+
+df1 = df.shift(1).dropna()
+df2 = df.shift(2).dropna()
+df1 = df1.iloc[1:,:]
+df1.columns = [col+'_lag1' for col in df1.columns]
+df2.columns = [col+'_lag2' for col in df2.columns]
+df_new = df.iloc[2:,:]
+data = pd.concat([df1,df2,df_new],axis=1)
+X = data[['GAS_Temperature_OT-1_lag1','GAS_Temperature_OT-1_lag2']]
+X= sm.add_constant(X)
+Y = df_new.iloc[:,6]
+mdl = sm.OLS(Y,X)
+res = mdl.fit()
+
 
 def Stationarytest(TS):
     test = adfuller(TS, autolag='AIC')
