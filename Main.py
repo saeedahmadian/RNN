@@ -2,6 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
+from sklearn.model_selection import KFold
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 from tensorflow.keras.layers import LSTM
@@ -32,7 +33,12 @@ class RNN(object):
 
 
 data = normalize(read_file('Google_Stock_Price_Train.csv'))
-x , y = create_data_set(30,5,data.shape[0],data)
+
+x , y = create_data_set(30,10,data.shape[0],data)
+
+k_fold= KFold(n_splits=4,shuffle=True, random_state=np.random)
+
+for train_index, test_index in k_fold:
 
 myRNN =RNN(x.shape[1],y.shape[1],0.3)
 myRNN.fit_model(x,y,20,10)

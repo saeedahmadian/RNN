@@ -3,8 +3,8 @@ import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
 
 
-def read_file(name):
-    return pd.read_csv(name).iloc[:,1:2].values
+def read_file(csv_name,column_name):
+    return pd.read_csv(csv_name)[column_name].values
 
 
 def normalize(data):
